@@ -12,9 +12,6 @@ const session = require('express-session');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
-const http = require 'http'
-handle = (req, res) -> res.end "hit"
-
 mongoose.Promise = global.Promise;
 mongoose.connect(config.database, {useMongoClient: true,});
 let db = mongoose.connection;
@@ -30,11 +27,7 @@ db.on('error',function(err){
 
 const app = express();
 
-const PORT = process.env.PORT || 8080;
-
-// Create a server, uses `handleRequest` which is function that takes
-// care of providing requested data
-const server = http.createServer(handleRequest);
+const PORT = process.env.PORT || 3000;
 
 //MORGAN Middleware
 app.use(morgan('dev'));
@@ -122,9 +115,6 @@ app.use('/products',products);
 
 
 //Start Server
-//app.listen(app.get('port'), function(){
-//  console.log('Server started on port '+app.get('port')+'....');
-//});
-server.listen(PORT, () => {
-  console.log('Server started on port '+, PORT);
+app.listen(PORT, function(){
+  console.log('Server started on port '+PORT+'....');
 });
