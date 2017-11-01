@@ -12,6 +12,9 @@ const session = require('express-session');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
+const http = require 'http'
+handle = (req, res) -> res.end "hit"
+
 mongoose.Promise = global.Promise;
 mongoose.connect(config.database, {useMongoClient: true,});
 let db = mongoose.connection;
@@ -27,7 +30,9 @@ db.on('error',function(err){
 
 const app = express();
 
-app.set('port', (process.env.PORT || 3000));
+//app.set('port', (process.env.PORT || 3000));
+let server = http.createServer handle
+server.listen process.env.PORT || 5000
 
 //MORGAN Middleware
 app.use(morgan('dev'));
@@ -115,6 +120,6 @@ app.use('/products',products);
 
 
 //Start Server
-app.listen(app.get('port'), function(){
-  console.log('Server started on port '+app.get('port')+'....');
-});
+//app.listen(app.get('port'), function(){
+//  console.log('Server started on port '+app.get('port')+'....');
+//});
