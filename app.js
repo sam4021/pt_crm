@@ -30,7 +30,11 @@ db.on('error',function(err){
 
 const app = express();
 
-app.set('port', (process.env.PORT || 3000));
+const PORT = process.env.PORT || 8080;
+
+// Create a server, uses `handleRequest` which is function that takes
+// care of providing requested data
+const server = http.createServer(handleRequest);
 
 //MORGAN Middleware
 app.use(morgan('dev'));
@@ -118,6 +122,9 @@ app.use('/products',products);
 
 
 //Start Server
-app.listen(app.get('port'), function(){
-  console.log('Server started on port '+app.get('port')+'....');
+//app.listen(app.get('port'), function(){
+//  console.log('Server started on port '+app.get('port')+'....');
+//});
+server.listen(PORT, () => {
+  console.log('Server started on port '+, PORT);
 });
