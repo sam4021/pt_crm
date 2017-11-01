@@ -1,0 +1,55 @@
+<% include ../../partials/header %>
+<div id="ajax-content"><!--Start Breadcrumb-->
+<div class="row">
+<div id="breadcrumb" class="col-xs-12">
+<a href="#" class="show-sidebar">
+<i class="fa fa-bars"></i>
+</a>
+<ol class="breadcrumb pull-left">
+<li><a href="/">Dashboard</a></li>
+<li><a href="#">Products</a></li>
+</ol>
+<% include ../../partials/social %>
+</div>
+</div>
+<!--End Breadcrumb-->
+</div>
+<h3>Add Products Dashboard!</h3>
+<div class="well">
+  <form action="/sale/assign_imei/<%= cproducts.id %>" method="post">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="vendor">Vendor</label>
+          <% for(var ven of vendor){
+            if(cproducts.vendor == ven.id){ %>
+              <input type="text" name="vendor" id="vendor" value="<%= ven.name %>" class="form-control" disabled>
+              <input type="hidden" name="vendor_id" value="<%= ven.id %>">
+          <% } } %>
+        </div>
+        <div class="form-group">
+          <label for="product">Product</label>
+          <% for(var prod of products){
+            if(cproducts.product == prod.id){ %>
+              <input type="text" name="product" id="product" value="<%= prod.title %>" class="form-control" disabled>
+              <input type="hidden" name="product_id"  value="<%= prod.id %>">
+          <% } } %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h6>Products Picked From Vendor</h6>
+        <button type="button" name="button" onclick="addimei()">Add Imei</button>
+        <div id="imei_sec" class="row"></div>
+      </div>
+    </div>
+    <div class="col-md-12 pull-right">
+      <button type="submit" class="btn btn-success">SUBMIT</button>
+    </div>
+  </form>
+  <hr>
+  <small>Tick Products To add</small>
+  <div id="vendor_table" class="">
+
+  </div>
+</div>
+<% include ../../partials/footer %>

@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h4>Edit Product IMEI</h4>
+  </div>
+  <form class="" action="/sale/add_imei/<%= saleProd.id %>" method="post">
+  <div class="col-sm-12">
+      <% for( var prod of products){
+          if(saleProd.product == prod.id){
+        %>
+          <label class="pull-left">Title: <%= prod.title %></label>
+        <% } } %>
+        <label class="pull-right">Quantity : <%= saleProd.qty %></label>
+  </div>
+        <div class="col-sm-12">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>IMEI</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(var imei of saleProd.imei){ %>
+                <tr>
+                  <td><input type="text" name="imei[]" value="<%= imei %>"></td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+        <input type="hidden" name="id" value="<%= saleProd.sale %>">
+
+      <div class="clearfix"></div>
+      <div class="form-group col-sm-12 padding-15">
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+    </form>
+</div>

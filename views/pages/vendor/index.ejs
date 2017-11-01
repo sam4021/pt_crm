@@ -1,0 +1,35 @@
+<% include ../../partials/header %>
+<div class="x_panel">
+	<div class="x_title">
+		<h2>Vendors<small></small></h2>
+		<div class="clearfix"></div>
+	</div>
+	<div class="x_content">
+    <table class="table table-striped table-bordered datatable-fixed-header">
+        <thead>
+            <tr>
+                <th scope="col">name</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Email</th>
+                <th scope="col">Active</th>
+                <th scope="col" class="actions">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(var i = 0; i < vendors.length; i++) { %>
+            <tr>
+                <td><%= vendors[i].name %></td>
+                <td><%= vendors[i].phone %></td>
+                <td><%= vendors[i].email %></td>
+                <td><%= vendors[i].is_active %></td>
+                <td class="actions">
+                  <a href="/vendor/view/<%= vendors[i].id %>" >View</a>
+                  <a href="/vendor/edit/<%= vendors[i].id %>">Edit</a>
+                </td>
+            </tr>
+          <% } %>
+        </tbody>
+    </table>
+  </div>
+</div>
+<% include ../../partials/footer %>

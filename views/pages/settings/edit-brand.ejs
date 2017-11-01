@@ -1,0 +1,55 @@
+<% include ../../partials/header %>
+<div id="ajax-content"><!--Start Breadcrumb-->
+<div class="row">
+<div id="breadcrumb" class="col-xs-12">
+<a href="#" class="show-sidebar">
+<i class="fa fa-bars"></i>
+</a>
+<ol class="breadcrumb pull-left">
+<li><a href="/">Dashboard</a></li>
+<li><a href="/settings/">Settings</a></li>
+<li><a href="#">Edit Brand</a></li>
+</ol>
+<% include ../../partials/social %>
+</div>
+</div>
+<!--End Breadcrumb-->
+<div class="row">
+  <div class="col-md-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <div class="row">
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <form class="row" action="/settings/edit-brand/<%= brand.id %>" method="post">
+          <div class="col-md-8">
+            <div class="form-group col-md-8">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12">Brand</label>
+              <div class="col-md-9 col-sm-9 col-xs-12">
+                <input type="text" name="title" class="form-control" value="<%= brand.title %>">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </div>
+
+        </form>
+        <div class="row">
+          <div class="col-sm-2">
+
+          </div>
+          <div class="col-sm-2">
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<% include ../../partials/footer %>

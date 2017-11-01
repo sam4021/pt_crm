@@ -1,0 +1,64 @@
+<% include ../../partials/header %>
+<div id="ajax-content"><!--Start Breadcrumb-->
+<div class="row">
+<div id="breadcrumb" class="col-xs-12">
+<a href="#" class="show-sidebar">
+<i class="fa fa-bars"></i>
+</a>
+<ol class="breadcrumb pull-left">
+<li><a href="/">Dashboard</a></li>
+<li><a href="#">Products</a></li>
+</ol>
+<% include ../../partials/social %>
+</div>
+</div>
+<!--End Breadcrumb-->
+</div>
+<div class="x_panel">
+	<div class="x_title">
+		<h2>Products<small></small></h2>
+		<div class="clearfix"></div>
+	</div>
+	<div class="x_content">
+	<table class="table table-bordered table-striped table-hover table-heading table-datatable">
+		<thead>
+			<tr>
+        <th scope="col">Id</th>
+        <th scope="col">Title</th>
+        <th scope="col">price</th>
+        <th scope="col">Cost</th>
+        <th scope="col">Brand</th>
+        <th scope="col">Category</th>
+        <th scope="col">Visible</th>
+        <th scope="col" class="actions">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+      <% for(var product of products){ %>
+      <tr>
+          <td><%= product.id %></td>
+          <td><%= product.title %></td>
+          <td><%= product.price %></td>
+          <td><%= product.cost %></td>
+          <td><% for(var bra of brand){
+						if(product.brand == bra.id){ %>
+							<%= bra.title %>
+						<% }
+					}  %></td>
+          <td><%for(var cat of category){
+						if(product.category == cat.id){ %>
+							<%= cat.title %>
+						<% }
+					}  %></td>
+          <td><% if(product.visible==0){ %> <div class="chip red white-text">Off</div> <% } else{ %> <div class="chip green white-text">On</div> <% } %></td>
+          <td class="actions">
+            <a href="/products/view/<%= product.id %>" class="btn btn-success">View</a>
+
+          </td>
+      </tr>
+      <% } %>
+		</tbody>
+	</table>
+</div>
+</div>
+<% include ../../partials/footer %>

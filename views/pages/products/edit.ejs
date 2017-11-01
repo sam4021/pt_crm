@@ -1,0 +1,95 @@
+<% include ../../partials/header %>
+<div id="ajax-content"><!--Start Breadcrumb-->
+<div class="row">
+<div id="breadcrumb" class="col-xs-12">
+<a href="#" class="show-sidebar">
+<i class="fa fa-bars"></i>
+</a>
+<ol class="breadcrumb pull-left">
+<li><a href="/">Dashboard</a></li>
+<li><a href="/products">Products</a></li>
+<li><a href="#">Edit</a></li>
+</ol>
+<% include ../../partials/social %>
+</div>
+</div>
+<!--End Breadcrumb-->
+<div class="row">
+  <div class="col-md-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Edit Product </h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <form action="/products/edit/<%= products.id %>" method="post" role="form">
+          <div class="col-md-8 col-sm-8 col-xs-12">
+          <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Title </label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+              <input name="title" class="form-control" placeholder="Title" value="<%= products.title %>" required>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="brand">Brand</label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+              <select class="form-control" name="brand" id="brand" required>
+                <option value="">Choose option</option>
+                <% for(var i = 0; i < brands.length; i++){ %>
+                   <option value="<%= brands[i].id %>" <% if(products.brand==brands[i].id){ %> selected <% } %>><%= brands[i].title %></option>
+                <% } %>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="price">Price </label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+              <input name='price' class = 'form-control' placeholder='Price' value="<%= products.price %>" required>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cost">Cost </label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+               <input type="text" name="cost" class="form-control" placeholder="Cost" value="<%= products.cost %>" required>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+                <ul id="tree1">
+                  <% for(var cat1 of category){ %>
+                  <li>
+                    <div class="radio">
+        							<label>
+        								<input type="radio" name="category" value="<%= cat1.id %>" <% if(products. category==cat1.id){ %> checked <% } %>> <%= cat1.title %>
+        								<i class="fa fa-circle-o"></i>
+        							</label>
+        						</div>
+                    </li>
+                    <!-- <ul>
+
+                      <li>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addSub" onclick='PostCat("<%= cat1.id %>")' style="margin:0px 5px;">
+                          Add Category
+                        </button>
+                      </li>
+                    </ul> -->
+
+                  </li>
+                  <% } %>
+                </ul>
+          </div>
+          <div class="clearfix"></div>
+          <hr/>
+          <div class="ln_solid"></div>
+          <div class="form-group">
+            <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+              <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<% include ../../partials/footer %>

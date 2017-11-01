@@ -1,0 +1,112 @@
+<% include ../../partials/header %>
+<div id="ajax-content"><!--Start Breadcrumb-->
+<div class="row">
+<div id="breadcrumb" class="col-xs-12">
+<a href="#" class="show-sidebar">
+<i class="fa fa-bars"></i>
+</a>
+<ol class="breadcrumb pull-left">
+<li><a href="/">Dashboard</a></li>
+<li><a href="/sale/">Sale</a></li>
+<li><a href="#">New</a></li>
+</ol>
+<% include ../../partials/social %>
+</div>
+</div>
+<!--End Breadcrumb-->
+<div class="row">
+  <div class="col-md-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Add Sale </h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+
+        <form action="/sale/add" method="post" role="form" class="row">
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="md-form">
+              <label for="first_name">First Name</label>
+              <input type="text" id="first_name" name="first_name" class="form-control">
+            </div>
+            <div class="md-form">
+              <label for="first_name">Last Name</label>
+              <input type="text" id="last_name" name="last_name" class="form-control">
+            </div>
+            <div class="md-form">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" class="form-control">
+            </div>
+            <div class="md-form">
+              <label for="phone">Phone</label>
+              <input type="text" id="phone" name="phone" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <h3>Products Bought</h3>
+          <table class="table table-bordered table-striped table-hover table-heading table-datatable">
+            <thead>
+              <th>Product</th>
+              <th>Action</th>
+            </thead>
+            <tbody id="prod_sec">
+
+            </tbody>
+          </table>
+          </div>
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <hr>
+            <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="datatable-2">
+              <thead>
+                <tr>
+                  <td></td>
+                  <th><label><input type="text" name="search_title" value="Search Title" class="search_init" /></label></th>
+                  <th>Price</th>
+                  <th>Brand</th>
+                  <th><label><input type="text" name="search_vendor" value="Search Vendor" class="search_vendor" /></label></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(var product of products){ %>
+                <tr>
+                    <td>
+                      <div class="form-group checkbox-warning-filled">
+                          <input type="checkbox" name="product[]" value="<%= product.id %>" id="<%= product.id %>" class="filled-in" onclick="addprod(this)">
+                          <label for="<%= product.id %>"></label>
+                          <input type="hidden" name="product[]" value="<%= product.id %>" id="P_<%= product.id %>">
+                          <input type="hidden" value="<%= product.title %>" id="<%= product.id %>prod">
+                      </div>
+                    </td>
+                    <td><%= product.title %></td>
+                    <td><%= product.price %></td>
+                    <td><% for(var bra of brand){
+          						if(product.brand == bra.id){ %>
+          							<%= bra.title %>
+          						<% }
+          					}  %></td>
+                    <td><% for(var pven of pvendor){ %>
+                      <% if(pven.products == product.id){ %>
+                      <%for(var ven of vendor){ %>
+                        <% if(pven.vendor == ven.id){ %>
+                        <%= ven.name %>
+          						<% } } } else{ %>
+                        -
+                      <% }
+          					}  %></td>
+                </tr>
+                <% } %>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="form-group">
+            <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+              <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<% include ../../partials/footer %>

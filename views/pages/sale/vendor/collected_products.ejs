@@ -1,0 +1,68 @@
+<% include ../../../partials/header %>
+<div id="ajax-content"><!--Start Breadcrumb-->
+<div class="row">
+<div id="breadcrumb" class="col-xs-12">
+<a href="#" class="show-sidebar">
+<i class="fa fa-bars"></i>
+</a>
+<ol class="breadcrumb pull-left">
+<li><a href="/">Dashboard</a></li>
+<li><a href="/sale/">Sale</a></li>
+<li><a href="/sale/">Vendor Products</a></li>
+</ol>
+<% include ../../../partials/social %>
+</div>
+</div>
+<!--End Breadcrumb-->
+</div>
+<div class="x_panel">
+	<div class="x_title">
+		<h2>Collected Products From Vendor<small></small></h2>
+		<div class="clearfix"></div>
+	</div>
+	<div class="x_content">
+    <a href="/sale/collected_new/" class="btn btn-default">Add Collected</a>
+	<table class="table table-bordered table-striped table-hover table-heading table-datatable">
+		<thead>
+			<tr>
+        <th scope="col">Id</th>
+        <th scope="col">Vendor</th>
+        <th scope="col">Products</th>
+        <th scope="col" class="actions">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% for(var cprod of cproducts ){ %>
+				<tr>
+					<td><%= cprod.id %></td>
+					<td>
+						<% for(var ven of vendor ){
+								if(ven.id == cprod.vendor){
+							%>
+							<%= ven.name %>
+							<% } } %>
+					</td>
+					<td>
+						<% for(var prod of products ){%>
+								<% if(prod.id == cprod.product){
+							%>
+							<%= prod.title %>
+							<% } } %>
+					</td>
+					<td>
+						<% var i=0; for(var cprodi of cprodI){
+								if(cprodi.collected == cprod.id){
+									if(i==0){
+							%>
+						<a href="/sale/vendor_prod_info/<%= cprod.id %>">view</a> |
+						<% } } i++;} %>
+						<a href="/sale/assign_imei/<%= cprod.id %>">Assign Imei</a>
+					</td>
+				</tr>
+
+			<% } %>
+		</tbody>
+	</table>
+</div>
+</div>
+<% include ../../../partials/footer %>

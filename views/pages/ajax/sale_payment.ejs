@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h4 class="pull-left">Payment</h4>
+    <label class="pull-right">Total: Ksh.
+      <%
+      var GTotal=0;
+      var total=0;
+      var price=0;
+      var quantity=0;
+      for(var sprod of saleProd ){
+        if(sale.id == sprod.sale){
+          price=sprod.price;
+          quantity= sprod.qty;
+          total=price *quantity;
+          GTotal= GTotal + total;
+       } } %>
+       <%= GTotal %> || Balance
+       <%
+       var fAmount=0;
+       var amount = 0;
+       for(var pay of payment ){
+           amount=pay.amount;
+           fAmount = amount+ fAmount;
+         } %>
+         <%= GTotal-fAmount %>
+    </label>
+  </div>
+  <form class="" action="/sale/sale_payment/<%= sale.id %>" method="post">
+    <hr>
+        <div class="col-sm-3">
+          <label for="amount" class="col-sm-4">Amount</label>
+        </div>
+        <div class="col-sm-8">
+          <input type="text" name="amount" value="" class="col-sm-8 form-control" id="amount">
+        </div>
+        <input type="hidden" name="id" value="<%= sale.id %>">
+        <input type="hidden" name="total" value="<%= GTotal %>">
+        <input type="hidden" name="balance" value="<%= GTotal-fAmount %>">
+
+      <div class="clearfix"></div>
+      <div class="form-group col-sm-12 padding-15">
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+    </form>
+</div>

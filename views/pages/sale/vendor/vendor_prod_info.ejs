@@ -1,0 +1,76 @@
+<% include ../../../partials/header %>
+<div id="ajax-content"><!--Start Breadcrumb-->
+<div class="row">
+<div id="breadcrumb" class="col-xs-12">
+<a href="#" class="show-sidebar">
+<i class="fa fa-bars"></i>
+</a>
+<ol class="breadcrumb pull-left">
+<li><a href="/">Dashboard</a></li>
+<li><a href="/sale/">Sale</a></li>
+<li><a href="#">Vendor Product Info</a></li>
+</ol>
+<% include ../../../partials/social %>
+</div>
+</div>
+<!--End Breadcrumb-->
+</div>
+<div class="x_panel">
+	<div class="x_title">
+		<h2>Collected Product Info<small></small></h2>
+		<div class="clearfix"></div>
+	</div>
+	<div class="x_content">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="vendor">Vendor</label>
+          <% for(var ven of vendor){
+            if(cproducts.vendor == ven.id){ %>
+              <input type="text" name="vendor" id="vendor" value="<%= ven.name %>" class="form-control" disabled>
+              <input type="hidden" name="vendor_id" value="<%= ven.id %>">
+          <% } } %>
+        </div>
+        <div class="form-group">
+          <label for="product">Product</label>
+          <% for(var prod of products){
+            if(cproducts.product == prod.id){ %>
+              <input type="text" name="product" id="product" value="<%= prod.title %>" class="form-control" disabled>
+              <input type="hidden" name="product_id"  value="<%= prod.id %>">
+          <% } } %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <table class="table table-bordered table-striped table-hover table-heading table-datatable">
+          <thead>
+            <th>Products IMEI</th>
+						<th>Status</th>
+						<th>Action</th>
+          </thead>
+          <% for(var prodI of productsInfo){ %>
+            <tr>
+              <td><%= prodI.imei %></td>
+							<td><%= prodI.status %></td>
+							<td><button type="button"  onclick="vendor_imei_edit('<%= prodI.id %>')">Edit</button>|<button type="button"  onclick="vendor_imei_status('<%= prodI.id %>')">Status</button></td>
+            </tr>
+          <% } %>
+        </table>
+      </div>
+    </div>
+</div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="vendor-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div id="ModalBody" class="modal-body">
+
+      </div>
+    </div>
+  </div>
+</div>
+<% include ../../../partials/footer %>

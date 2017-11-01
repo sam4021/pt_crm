@@ -1,0 +1,83 @@
+<% include ../../partials/header %>
+<div id="ajax-content"><!--Start Breadcrumb-->
+<div class="row">
+<div id="breadcrumb" class="col-xs-12">
+<a href="#" class="show-sidebar">
+<i class="fa fa-bars"></i>
+</a>
+<ol class="breadcrumb pull-left">
+<li><a href="/">Dashboard</a></li>
+<li><a href="#">Sale</a></li>
+</ol>
+<% include ../../partials/social %>
+</div>
+</div>
+<!--End Breadcrumb-->
+
+<div class="x_panel">
+	<div class="x_title">
+		<h2>Sales<small></small></h2>
+		<div class="clearfix"></div>
+	</div>
+	<div class="x_content">
+    <a href="/sale/add/" >New Sale</a>
+		<table class="table table-bordered table-striped table-hover table-heading table-datatable" id="datatable-2">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Date</th>
+					<th>Status</th>
+					<th>Amount</th>
+					<th>Paid Amount</th>
+					<th>Products</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% for(var sal of sale){ %>
+				<tr>
+						<td><%= sal.id %></td>
+						<td><%= sal.created_at %></td>
+						<td><%= sal.status %></td>
+						<td><%
+		        var GTotal=0;
+		        var total=0;
+		        var price=0;
+		        var quantity=0;
+		        for(var sprod of saleProd ){
+							if(sprod.sale == sal.id){
+		            price=sprod.price;
+		            quantity= sprod.qty;
+		            total=price *quantity;
+		            GTotal= GTotal + total;
+		         } } %>
+		         <%= GTotal %></td>
+						 <td>
+							 <%
+							 var fAmount=0;
+							 var amount = 0;
+							 var balance =0
+							 for(var pay of payment ){
+								 if(pay.sale == sal.id){
+							 		amount=pay.amount;
+							 		fAmount = amount+ fAmount;
+							 	} } %>
+							 <%= fAmount %>
+						 </td>
+						 <td><%
+ 			        var quantity=0;
+ 			        for(var sprod of saleProd ){
+ 								if(sprod.sale == sal.id){
+ 			            quantity= quantity+1;
+ 			         } } %>
+ 			         <%= quantity %>
+						 </td>
+						 <td><a href="/sale/sal/<%= sal.id %>">view</a></td>
+				</tr>
+				<% } %>
+
+			</tbody>
+		</table>
+  </div>
+</div>
+<% include ../../partials/footer %>
